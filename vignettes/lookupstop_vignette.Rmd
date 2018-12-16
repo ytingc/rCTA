@@ -1,0 +1,88 @@
+---
+title: "Functions explained - look up general information"
+author: "Yu- Ting Cheng"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Function explained - lookupstop}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+```{r include=FALSE}
+devtools::install_github("ytingc/rCTA")
+library(rCTA)
+
+```
+This vignette covers how to use function `get_route()`, `get_direction`, and `lookupstop()` in the `rCTA` package. They allow users to lookup various information of buses including routes, direction, stop ID, and stop name. 
+
+## Search for routes
+
+Function `get_route()` allows to get route names based on your specified bus number. The following example shows how to get the route name of bus number 126:
+```{r}
+result <-get_route(bus = 5)
+knitr::kable(head(result))
+```
+
+If bus number is not specified, it will provide a dataframe with the all the bus number with its corresponding route names.
+
+
+```{r}
+result <- get_route()
+knitr::kable(head(result, 10))
+```
+
+
+
+## Search for direction
+
+Function `get_direction` allows to look up direction of a specified bus number. The following example shows how to get the route name of bus number 126:
+
+```{r}
+result <- get_direction(bus = 126)
+knitr::kable(head(result))
+
+```
+
+## Look up stops information. 
+
+Function `lookupstop` is particularly useful when stop ID is unkown. This function allows people to look up stops information based on the bus number(required), stop name(optional), and direction(optional). Arguments are case insensitive. It will generate a dataframe with potential matching stop in rows with the following columns:
+
+* bus number
+* stop ID
+* direction
+* longitude 
+* latidude 
+
+Get the information based on bus number 1:
+```{r}
+result <- lookupstop(bus = 1)
+knitr::kable(head(result, 10))
+```
+
+Get the information based on bus numebr 1 and stop name containing `michigan`:
+
+```{r}
+result <- lookupstop(bus = 1, stopname = "michigan")
+knitr::kable(head(result, 10))
+```
+
+Get the information based on bus number 1 and direction `southbound`:
+```{r}
+result <- lookupstop(bus = 1, dir = "southbound")
+knitr::kable(head(result, 10))
+```
+
+
+Get the information based on bus number 1 and stop name containing `michigan` and `southbound`:
+```{r}
+result <- lookupstop(bus = 1, stopname = "Michigan", dir = "Southbound")
+knitr::kable(head(result, 10))
+```
+
