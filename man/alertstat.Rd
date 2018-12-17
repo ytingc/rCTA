@@ -4,10 +4,10 @@
 \alias{alertstat}
 \title{Provides an overview of current bus alerts.}
 \usage{
-alertstat(key = Sys.getenv("BUS_CLIENT_ID"))
+alertstat(key = Sys.getenv("BUS_CLIENT_KEY"))
 }
 \arguments{
-\item{key}{Key for acessing the API}
+\item{key}{Key for accessing the API}
 }
 \value{
 Table with the counts of each type of alerts.

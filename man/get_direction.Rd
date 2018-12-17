@@ -4,7 +4,7 @@
 \alias{get_direction}
 \title{Allow users to get direction based on bus number.}
 \usage{
-get_direction(bus, key = Sys.getenv("BUS_CLIENT_ID"))
+get_direction(bus, key = Sys.getenv("BUS_CLIENT_KEY"))
 }
 \arguments{
 \item{bus}{Bus number.}

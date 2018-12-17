@@ -10,7 +10,6 @@
 
 
 get_alert <- function(bus){
-  Sys.setenv(BUS_CLIENT_ID = "g4cvcnekeeJdvNQbeBgVVfCPR")
   url <- "http://www.transitchicago.com/api/1.0/alerts.aspx?"
   query_params <- list(routeid = bus, outputType = "JSON")
   routealert <- httr::GET(url, query = query_params)

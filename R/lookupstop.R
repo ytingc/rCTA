@@ -8,15 +8,14 @@
 #' @param stopname Name of bus stop.It is optional and case insensitive.
 #' @param dir Direction of routes.It is optional and case insensitive.
 #' @param key Key for accessing the API.
-#' @return Dataframe with potential matching stop with bus number, stop ID, direction, longitude and latidude columns.
+#' @return Dataframe with potential matching stop with bus number, stop ID, direction, longitude and latitude columns.
 #' @export
 #' @examples
 #' lookupstop(bus = 1, stopname = "Michigan")
 #' lookupstop(bus = 1, dir = "Southbound")
 #' lookupstop(bus = 1, stopname = "indiana", dir = "northbound")
 
-lookupstop <- function(bus, stopname = NULL, dir = NULL, key = Sys.getenv("BUS_CLIENT_ID")){
-  Sys.setenv(BUS_CLIENT_ID = "g4cvcnekeeJdvNQbeBgVVfCPR")
+lookupstop <- function(bus, stopname = NULL, dir = NULL, key = Sys.getenv("BUS_CLIENT_KEY")){
   url <- "http://ctabustracker.com/bustime/api/v2/getroutes?"
   query_params <- list(key = key,format = "json")
   getroutes <- httr::GET(url, query = query_params)

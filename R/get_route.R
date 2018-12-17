@@ -12,13 +12,12 @@
 #' get_route(bus = 5)
 
 
-get_route <- function(bus = NULL, key = Sys.getenv("BUS_CLIENT_ID")){
-  Sys.setenv(BUS_CLIENT_ID = "g4cvcnekeeJdvNQbeBgVVfCPR")
+get_route <- function(bus = NULL, key = Sys.getenv("BUS_CLIENT_KEY")){
   url <- "http://ctabustracker.com/bustime/api/v2/getroutes?"
-  query_params <- list(key = Sys.getenv("BUS_CLIENT_ID"),format = "json")
+  query_params <- list(key = key,format = "json")
   getroutes <- httr::GET(url, query = query_params)
   routes <- jsonlite::fromJSON(httr::content(getroutes, as = "text"))
-  df_routes <- data.frame(routes)[,1:2]
+  df_routes <- data.frame(routes)[,c(1,2)]
   df_routes <- dplyr::rename(df_routes, bus_number = 1, route_name = 2)
 
   if(is.null(bus)){

@@ -5,7 +5,7 @@
 \title{Allow users lookup the information of bus stop.}
 \usage{
 lookupstop(bus, stopname = NULL, dir = NULL,
-  key = Sys.getenv("BUS_CLIENT_ID"))
+  key = Sys.getenv("BUS_CLIENT_KEY"))
 }
 \arguments{
 \item{bus}{Bus number.}
@@ -17,7 +17,7 @@ lookupstop(bus, stopname = NULL, dir = NULL,
 \item{key}{Key for accessing the API.}
 }
 \value{
-Dataframe with potential matching stop with bus number, stop ID, direction, longitude and latidude columns.
+Dataframe with potential matching stop with bus number, stop ID, direction, longitude and latitude columns.
 }
 \description{
 This function allows to lookup the information of stops,

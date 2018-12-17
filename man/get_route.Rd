@@ -4,7 +4,7 @@
 \alias{get_route}
 \title{Allow users to get route names.}
 \usage{
-get_route(bus = NULL, key = Sys.getenv("BUS_CLIENT_ID"))
+get_route(bus = NULL, key = Sys.getenv("BUS_CLIENT_KEY"))
 }
 \arguments{
 \item{bus}{Bus number.}

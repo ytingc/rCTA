@@ -3,7 +3,7 @@
 #' This function allows users to obtain an overview of current alerts of all CTA buses
 #' through a summary table that provide the count of each type of alerts.
 #'
-#' @param key Key for acessing the API
+#' @param key Key for accessing the API
 #' @return Table with the counts of each type of alerts.
 #' @export
 #' @examples
@@ -11,9 +11,8 @@
 
 
 
-alertstat <- function(key = Sys.getenv("BUS_CLIENT_ID")){
+alertstat <- function(key = Sys.getenv("BUS_CLIENT_KEY")){
   alertlist <- data.frame()
-  Sys.setenv(BUS_CLIENT_ID = "g4cvcnekeeJdvNQbeBgVVfCPR")
   url <- "http://ctabustracker.com/bustime/api/v2/getroutes?"
   query_params <- list(key = key,format = "json")
   route <- httr::GET(url, query = query_params)

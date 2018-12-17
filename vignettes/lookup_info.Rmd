@@ -4,7 +4,7 @@ author: "Yu- Ting Cheng"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Function explained - lookupstop}
+  %\VignetteIndexEntry{Function explained - look up general information}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -52,13 +52,13 @@ knitr::kable(head(result))
 
 ## Look up stops information. 
 
-Function `lookupstop` is particularly useful when stop ID is unkown. This function allows people to look up stops information based on the bus number(required), stop name(optional), and direction(optional). Arguments are case insensitive. It will generate a dataframe with potential matching stop in rows with the following columns:
+Function `lookupstop` is particularly useful when stop ID is unknown. This function allows people to look up stops information based on the bus number(required), stop name(optional), and direction(optional). Arguments are case insensitive. It will generate a dataframe with potential matching stop in rows with the following columns:
 
 * bus number
 * stop ID
 * direction
 * longitude 
-* latidude 
+* latitude 
 
 Get the information based on bus number 1:
 ```{r}
@@ -66,7 +66,7 @@ result <- lookupstop(bus = 1)
 knitr::kable(head(result, 10))
 ```
 
-Get the information based on bus numebr 1 and stop name containing `michigan`:
+Get the information based on bus number 1 and stop name containing `michigan`:
 
 ```{r}
 result <- lookupstop(bus = 1, stopname = "michigan")

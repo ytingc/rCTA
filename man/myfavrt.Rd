@@ -4,7 +4,7 @@
 \alias{myfavrt}
 \title{Allow users get real-time information of your favorite route.}
 \usage{
-myfavrt(bus, start_id, end_id, key = Sys.getenv("BUS_CLIENT_ID"),
+myfavrt(bus, start_id, end_id, key = Sys.getenv("BUS_CLIENT_KEY"),
   interval = 60, times = 3)
 }
 \arguments{
@@ -30,5 +30,5 @@ current status, delay and alert message. It also allows users to collect and sav
 real-time information for a given period in a data frame through calling the function periodically.
 }
 \examples{
-myfavrt(bus = 126, start_id = 36, end_id = 48, interval= 0, times = 1)
+myfavrt(bus = 126, start_id = 36, end_id = 60, interval= 0, times = 1)
 }

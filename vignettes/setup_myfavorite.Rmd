@@ -1,0 +1,67 @@
+---
+title: "Functions explained - set up my favorite route"
+author: "Yu- Ting Cheng"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Functions explained - set up my favorite route}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+```{r include=FALSE}
+devtools::install_github("ytingc/rCTA")
+library(rCTA)
+
+```
+This vignette covers how to use function `myfavrt` to set up a favorite route get real-time information in the `rCTA` package. It allows users to get a dataframe of estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically.
+
+NOTE: Since the CTA system updates data about once per minute, it may generate error message "No arrival times" if the system has not been updated yet. Also, it may generate an error message `No service scheduled` when you request at a time out of operation. 
+
+## Get Real-time Traveling Information
+
+Function `myfavrt()` allows to set up your favorite routes based on `bus`, `start_id` and `end_id`:
+
+* bus: bus number.
+* start_id: ID of the departure stop. This can be look up through function `lookupstop` in this package.
+* end_id: ID of the destination stop. This can be look up through function `lookupstop` in this package.
+
+After setting up, this function will provide you a set of real-time information and about your traveling, including:
+
+* wait time (in min)
+* travel time (in min)
+* arrival time
+* delay information
+* alert information
+
+For example:
+
+Get the information of my favorite route as a dataframe. In this example, we only collect the real-time information once, so we set the arguments `interval` to 0, and `times` to 1. 
+```{r}
+result <- myfavrt(bus = 126, start_id = 36, end_id = 60, interval= 0, times = 1)
+knitr::kable(head(result))
+```
+
+## Collect and Save the Real-time information periodically.
+This function also allow users to collect and save the real-time information in a dataframe through calling the function periodically.
+
+For example:
+
+Get my favorite route as above, collect the real-time information once per minute, and repeat 5 times. 
+
+```{r}
+result <- myfavrt(bus = 126, start_id = 36, end_id = 60, interval= 60, times = 5)
+knitr::kable(head(result))
+```
+
+
+
+
+
+

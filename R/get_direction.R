@@ -11,8 +11,7 @@
 
 
 
-get_direction <- function(bus, key = Sys.getenv("BUS_CLIENT_ID")){
-  Sys.setenv(BUS_CLIENT_ID = "g4cvcnekeeJdvNQbeBgVVfCPR")
+get_direction <- function(bus, key = Sys.getenv("BUS_CLIENT_KEY")){
   bus_dir <- data.frame()
   url <- "http://ctabustracker.com/bustime/api/v2/getdirections?"
   result <- httr::GET(url, query = list(rt = bus, key = key, format = "json"))

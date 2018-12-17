@@ -1,0 +1,42 @@
+---
+title: "Functions explained - look up alert information"
+author: "Yu- Ting Cheng"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Function explained - look up alert information}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+```{r include=FALSE}
+devtools::install_github("ytingc/rCTA")
+library(rCTA)
+
+```
+This vignette covers how to use function `get_alert()` and `alertstat()` in the `rCTA` package. They allow users to look up real-time and detailed information of alerts and get an overview of the current bus services.  
+
+## Look up Alerts
+
+Function `get_alert()` allows to get detailed information about current alerts, which is helpful for schedule traveling. The following example shows how to get the alert information of bus number 8:
+```{r}
+result <-get_alert(bus = 8)
+knitr::kable(head(result))
+```
+
+## Statistics of Alerts
+Function `alertstat()` allows to obtain an overview of current alerts of all CTA buses through a summary table that provide the count of each type of alerts. 
+
+
+```{r}
+result <- alertstat()
+knitr::kable(head(result), col.names = c("Type", "Frequency"))
+```
+
+

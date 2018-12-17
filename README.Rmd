@@ -85,7 +85,7 @@ Then, you can load rCTA package to play with:
 library(rCTA)
 ```
 
-## Basic Features of rCTA pacakge
+## Features of rCTA pacakge
 
 **Search Stops**
 
@@ -98,7 +98,7 @@ lookupstop(bus = 1, stopname = "Indiana", dir = "Northbound")
 
 **Set up favorite route**
 
-Get real-time information of your favorite route. You can obtain estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically. Note that it is a real-time data, it may generate error message"No service scheduled" when your request time is out of operation.
+Get real-time information of your favorite route. You can obtain estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically. Note that it is a real-time data, it may generate error message"No service scheduled" when you request at a time out of operation.
 
 ![ ](man/figures/example_myfavrt.png)
 
