@@ -13,6 +13,7 @@ Depends: R (>= 2.10)
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
+URL: https://ytingc.github.io/rCTA/
 RoxygenNote: 6.1.0.9000
 Suggests: 
     knitr,
