@@ -40,7 +40,7 @@ knitr::kable(head(result, 10))
 
 
 
-## Search for direction
+## Search direction
 
 Function `get_direction` allows to look up direction of a specified bus number. The following example shows how to get the route name of bus number 126:
 
@@ -50,7 +50,7 @@ knitr::kable(head(result))
 
 ```
 
-## Look up stops information. 
+## Look up stops information 
 
 Function `lookupstop` is particularly useful when stop ID is unknown. This function allows people to look up stops information based on the bus number(required), stop name(optional), and direction(optional). Arguments are case insensitive. It will generate a dataframe with potential matching stop in rows with the following columns:
 

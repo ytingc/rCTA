@@ -68,7 +68,9 @@ library(rCTA)
 Features of rCTA pacakge
 ------------------------
 
-**Search Routes** Get routes of bus number 5.
+**Search Routes**
+
+Get routes of bus number 5.
 
 ``` r
 result <-get_route(bus = 5)
@@ -79,7 +81,9 @@ knitr::kable(head(result))
 |:------------|:----------------------|
 | 5           | South Shore Night Bus |
 
-**Search Direction** Get direction of bus number 126.
+**Search Direction**
+
+Get direction of bus number 126.
 
 ``` r
 result <- get_direction(bus = 126)
@@ -124,13 +128,15 @@ knitr::kable(head(result))
 
 |  no.| current\_time  | bus\_num | start\_stop\_id | start\_stop\_name         |  end\_stop\_id| end\_stop\_name    | wait\_time\_in\_min | departurel\_time | arrival\_time  | travel\_time\_in\_min | delay | status          |
 |----:|:---------------|:---------|:----------------|:--------------------------|--------------:|:-------------------|:--------------------|:-----------------|:---------------|:----------------------|:------|:----------------|
-|  126| 20181217 10:49 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 2                   | 20181217 10:51   | 20181217 11:02 | 11 mins               | FALSE | Planned Reroute |
-|  126| 20181217 10:50 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | DUE                 | 20181217 10:51   | 20181217 11:02 | 11 mins               | FALSE | Planned Reroute |
-|  126| 20181217 10:51 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 12                  | 20181217 11:04   | 20181217 11:15 | 11 mins               | FALSE | Planned Reroute |
-|  126| 20181217 10:52 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 11                  | 20181217 11:04   | 20181217 11:15 | 11 mins               | FALSE | Planned Reroute |
-|  126| 20181217 10:53 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 11                  | 20181217 11:04   | 20181217 11:15 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 11:17 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 7                   | 20181217 11:25   | 20181217 11:36 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 11:18 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 6                   | 20181217 11:25   | 20181217 11:36 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 11:20 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 5                   | 20181217 11:25   | 20181217 11:36 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 11:20 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 5                   | 20181217 11:26   | 20181217 11:37 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 11:22 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 4                   | 20181217 11:26   | 20181217 11:37 | 11 mins               | FALSE | Planned Reroute |
 
-**Get Alerts** Get the alerts of bus number 8.
+**Get Alerts**
+
+Get the alerts of bus number 8.
 
 ``` r
 result <-get_alert(bus = 8)

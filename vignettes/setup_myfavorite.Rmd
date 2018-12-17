@@ -22,7 +22,7 @@ library(rCTA)
 ```
 This vignette covers how to use function `myfavrt` to set up a favorite route get real-time information in the `rCTA` package. It allows users to get a dataframe of estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically.
 
-NOTE: Since the CTA system updates data about once per minute, it may generate error message "No arrival times" if the system has not been updated yet. Also, it may generate an error message `No service scheduled` when you request at a time out of operation. 
+NOTE: Since the CTA system updates data about once per minute, it may generate error message `No arrival times` if the system has not been updated yet. Also, it may generate an error message `No service scheduled` when you request at a time out of operation. 
 
 ## Get Real-time Traveling Information
 
@@ -48,7 +48,7 @@ result <- myfavrt(bus = 126, start_id = 36, end_id = 60, interval= 0, times = 1)
 knitr::kable(head(result))
 ```
 
-## Collect and Save the Real-time information periodically.
+## Collect and Save the Real-time Information Periodically
 This function also allow users to collect and save the real-time information in a dataframe through calling the function periodically.
 
 For example:
