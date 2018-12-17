@@ -18,7 +18,7 @@
 
 
 
-myfavrt <- function(bus, start_id, end_id, key = Sys.getenv("BUS_CLIENT_KEY"), interval= 60, times = 3){
+myfavrt <- function(bus, start_id, end_id, key = Sys.getenv("BUS_CLIENT_KEY"), interval= 0, times = 1){
   myfavoritert <- data.frame()
   for(i in 1:times){
     url <- "http://ctabustracker.com/bustime/api/v2/getpredictions?"

@@ -1,9 +1,8 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 rCTA
 ====
 
-`rCTA` is an R interfact to access the APIs of Chicago Transit Authority(CTA) in order to get real-time information of buses and help users make empowered decisions about their trip.The APIs include **Bus Tracker API** and **Customer Alerts API**. Check out the documentations here:
+`rCTA` is an R interfact to access the APIs of Chicago Transit Authority(CTA) in order to get real-time information of buses and help users make empowered decisions about their trips.The APIs include **Bus Tracker API** and **Customer Alerts API**. Check out the documentations here:
 
 [Bus Tracker API Documentation](https://www.transitchicago.com/assets/1/6/cta_Bus_Tracker_API_Developer_Guide_and_Documentation_20160929.pdf)
 
@@ -26,7 +25,7 @@ There are two API contained in this package:
 API Authentication
 ------------------
 
-You will need an API key to interact with **Bus Tracker API** on every requrest (Customer Alerts API does not need Authentication). To become authorized, follow the instructions below:
+You will need an API key to interact with **Bus Tracker API** on every requrest (Customer Alerts API does not need authentication). To become authorized, follow the instructions below:
 
 **1. Get an API key**
 
@@ -54,13 +53,7 @@ BUS_CLIENT_KEY = THE_API_KEY_HERE
 Installation and Setup
 ----------------------
 
-You can install the released version of rCTA from **CRAN** with:
-
-``` r
-install.packages("rCTA")
-```
-
-Or, development version from **GitHub**:
+You can install the released version of rCTA from **GitHub** with:
 
 ``` r
 devtools::install_github("ytingc/rCTA")
@@ -72,64 +65,117 @@ Then, you can load rCTA package to play with:
 library(rCTA)
 ```
 
-Basic Features of rCTA pacakge
-------------------------------
+Features of rCTA pacakge
+------------------------
+
+**Search Routes** Get routes of bus number 5.
+
+``` r
+result <-get_route(bus = 5)
+knitr::kable(head(result))
+```
+
+| bus\_number | route\_name           |
+|:------------|:----------------------|
+| 5           | South Shore Night Bus |
+
+**Search Direction** Get direction of bus number 126.
+
+``` r
+result <- get_direction(bus = 126)
+knitr::kable(head(result))
+```
+
+| dir       |
+|:----------|
+| Eastbound |
+| Westbound |
 
 **Search Stops**
 
-Search for stop information. Useful when stop\_id is unkown. You can specify bus number, and/or stop name, and/or direciton. For example:
+Search for stop information. Useful when stop\_id is unknown.It is not case sensitive. For example:
 
 ``` r
-lookupstop(bus = 1, stopname = "Indiana", dir = "Northbound")
-#>    bus_num  direction stop_id                stop_name      lat       lon
-#> 8        1 Northbound    1563    Indiana & 31st Street 41.83828 -87.62187
-#> 9        1 Northbound    1562    Indiana & 32nd Street 41.83647 -87.62184
-#> 10       1 Northbound   16119 Indiana & 33rd Boulevard 41.83493 -87.62186
-#> 11       1 Northbound    1560    Indiana & 34th Street 41.83299 -87.62179
-#> 12       1 Northbound   15314    Indiana & 35th Street 41.83113 -87.62155
+result <- lookupstop(bus = 1, stopname = "Michigan", dir = "southbound")
+knitr::kable(head(result, 10))
 ```
+
+| bus\_num | direction  | stop\_id | stop\_name             |       lat|        lon|
+|:---------|:-----------|:---------|:-----------------------|---------:|----------:|
+| 1        | Southbound | 1606     | 3000 S Michigan        |  41.84045|  -87.62356|
+| 1        | Southbound | 1590     | Michigan & 11th Street |  41.86892|  -87.62394|
+| 1        | Southbound | 1592     | Michigan & 13th Street |  41.86553|  -87.62399|
+| 1        | Southbound | 1593     | Michigan & 14th Street |  41.86391|  -87.62414|
+| 1        | Southbound | 1595     | Michigan & 16th Street |  41.85997|  -87.62403|
+| 1        | Southbound | 1596     | Michigan & 18th Street |  41.85763|  -87.62405|
+| 1        | Southbound | 1598     | Michigan & 21st Street |  41.85404|  -87.62384|
+| 1        | Southbound | 16014    | Michigan & 23rd Street |  41.85130|  -87.62383|
+| 1        | Southbound | 17243    | Michigan & 24th Street |  41.84946|  -87.62383|
+| 1        | Southbound | 1602     | Michigan & 25th Street |  41.84723|  -87.62372|
 
 **Set up favorite route**
 
-Get real-time information of your favorite route. You can obtain estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically. Note that it is a real-time data, it may generate error message"No service scheduled" when your request time is out of operation.
+Get real-time information of your favorite route. You can obtain estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically. Note that it is a real-time data, it may generate error message"No service scheduled" when you request at a time out of operation. Or, it may generate error message "No arrival times" if the system has not been updated yet, since the CTA system update the data about once per minute.
 
 ``` r
-myfavrt(bus = 126, start_id = 36, end_id = 48, interval= 60, times = 3)
+result <- myfavrt(bus = 126, start_id = 36, end_id = 60, interval= 60, times = 5)
+knitr::kable(head(result))
 ```
 
-![](man/figures/example_myfavrt.png)
+|  no.| current\_time  | bus\_num | start\_stop\_id | start\_stop\_name         |  end\_stop\_id| end\_stop\_name    | wait\_time\_in\_min | departurel\_time | arrival\_time  | travel\_time\_in\_min | delay | status          |
+|----:|:---------------|:---------|:----------------|:--------------------------|--------------:|:-------------------|:--------------------|:-----------------|:---------------|:----------------------|:------|:----------------|
+|  126| 20181217 10:49 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 2                   | 20181217 10:51   | 20181217 11:02 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 10:50 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | DUE                 | 20181217 10:51   | 20181217 11:02 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 10:51 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 12                  | 20181217 11:04   | 20181217 11:15 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 10:52 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 11                  | 20181217 11:04   | 20181217 11:15 | 11 mins               | FALSE | Planned Reroute |
+|  126| 20181217 10:53 | 126      | 36              | Jackson + 2609 West Alley |             60| Jackson + Aberdeen | 11                  | 20181217 11:04   | 20181217 11:15 | 11 mins               | FALSE | Planned Reroute |
+
+**Get Alerts** Get the alerts of bus number 8.
+
+``` r
+result <-get_alert(bus = 8)
+knitr::kable(head(result))
+```
+
+| Headline                | ShortDescription                                                                          | EventStart | EventEnd |
+|:------------------------|:------------------------------------------------------------------------------------------|:-----------|:---------|
+| New Schedules in Effect | Beginning Sunday, December 16, updated schedules went into effect for several bus routes. | 2018-12-16 | NA       |
 
 **Get an Overview of Current Bus Alerts**
 
 Obtain an overview of current alerts of all CTA buses through a summary table that provide the count of each type of alerts.
 
 ``` r
-alertstat()
-#> 
-#>       Bus Stop Note Bus Stop Relocation     Planned Reroute 
-#>                   2                   9                  17 
-#>      Service Change        Special Note 
-#>                  13                 136
+result <- alertstat()
+knitr::kable(head(result), col.names = c("Type", "Frequency"))
 ```
+
+| Type                |  Frequency|
+|:--------------------|----------:|
+| Bus Stop Note       |          2|
+| Bus Stop Relocation |          8|
+| Planned Reroute     |         15|
+| Service Change      |         13|
+| Special Note        |        136|
 
 Vignettes
 ---------
 
-Detailed information about functions can be otained through the following:
+Detailed application of functions can be otained through the following:
 
 ``` r
-# search for stop information
-vignette("lookupstop", package = "rCTA")
+# search for general information
+vignette("lookup_info", package = "rCTA")
 ```
 
 ``` r
 # set up my favorite route
-vignette("myfavrt", package = "rCTA")
+vignette("setup_myfavorite", package = "rCTA")
 ```
 
 ``` r
-# get statistical information of alerts
-vignette("alertstat", package = "rCTA")
+# get information of alerts
+vignette("Alert_info", package = "rCTA")
 ```
 
 Contact

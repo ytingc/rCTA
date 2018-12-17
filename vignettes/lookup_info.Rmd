@@ -16,13 +16,13 @@ knitr::opts_chunk$set(
 )
 ```
 ```{r include=FALSE}
-devtools::install_github("ytingc/rCTA")
+devtools::install_github("ytingc/rCTA",build_vignettes = TRUE)
 library(rCTA)
 
 ```
 This vignette covers how to use function `get_route()`, `get_direction`, and `lookupstop()` in the `rCTA` package. They allow users to lookup various information of buses including routes, direction, stop ID, and stop name. 
 
-## Search for routes
+## Search routes
 
 Function `get_route()` allows to get route names based on your specified bus number. The following example shows how to get the route name of bus number 126:
 ```{r}

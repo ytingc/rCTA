@@ -5,7 +5,7 @@
 \title{Allow users get real-time information of your favorite route.}
 \usage{
 myfavrt(bus, start_id, end_id, key = Sys.getenv("BUS_CLIENT_KEY"),
-  interval = 60, times = 3)
+  interval = 0, times = 1)
 }
 \arguments{
 \item{bus}{Bus number.}

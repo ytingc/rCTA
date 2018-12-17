@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 ```{r include=FALSE}
-devtools::install_github("ytingc/rCTA")
+devtools::install_github("ytingc/rCTA",build_vignettes = TRUE)
 library(rCTA)
 
 ```

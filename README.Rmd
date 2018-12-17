@@ -2,7 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 rCTA
 =====
@@ -17,11 +16,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r include=FALSE}
-devtools::install_github("ytingc/rCTA")
+devtools::install_github("ytingc/rCTA", build_vignettes = TRUE)
 library(rCTA)
 
 ```
-`rCTA` is an R interfact to access the APIs of Chicago Transit Authority(CTA) in order to get real-time information of buses and help users  make empowered decisions about their trip.The APIs include **Bus Tracker API** and **Customer Alerts API**. Check out the documentations here:
+`rCTA` is an R interfact to access the APIs of Chicago Transit Authority(CTA) in order to get real-time information of buses and help users  make empowered decisions about their trips.The APIs include **Bus Tracker API** and **Customer Alerts API**. Check out the documentations here:
 
 [Bus Tracker API Documentation](https://www.transitchicago.com/assets/1/6/cta_Bus_Tracker_API_Developer_Guide_and_Documentation_20160929.pdf)
 
@@ -45,7 +44,7 @@ Data available through the API includes:
 
 
 ## API Authentication
-You will need an API key to interact with **Bus Tracker API** on every requrest (Customer Alerts API does not need Authentication). To become authorized, follow the instructions below:
+You will need an API key to interact with **Bus Tracker API** on every requrest (Customer Alerts API does not need authentication). To become authorized, follow the instructions below:
 
 **1. Get an API key**
 
@@ -70,12 +69,7 @@ BUS_CLIENT_KEY = THE_API_KEY_HERE
 
 ## Installation and Setup
 
-You can install the released version of rCTA from **CRAN** with:
-
-```{r, eval=FALSE }
-install.packages("rCTA")
-```
-Or, development version from **GitHub**:
+You can install the released version of rCTA from **GitHub** with:
 
 ```{r, eval=FALSE}
 devtools::install_github("ytingc/rCTA")
@@ -87,45 +81,76 @@ library(rCTA)
 
 ## Features of rCTA pacakge
 
-**Search Stops**
+**Search Routes**
 
-Search for stop information. Useful when stop_id is unkown. You can specify bus number, and/or stop name, and/or direciton. For example: 
+Get routes of bus number 5.
 
-```{r echo=TRUE}
-lookupstop(bus = 1, stopname = "Indiana", dir = "Northbound")
+```{r}
+result <-get_route(bus = 5)
+knitr::kable(head(result))
 ```
 
+**Search Direction**
+
+Get direction of bus number 126.
+
+```{r}
+result <- get_direction(bus = 126)
+knitr::kable(head(result))
+```
+
+**Search Stops**
+
+Search for stop information. Useful when stop_id is unknown.It is not case sensitive. For example: 
+
+```{r echo=TRUE}
+result <- lookupstop(bus = 1, stopname = "Michigan", dir = "southbound")
+knitr::kable(head(result, 10))
+```
 
 **Set up favorite route**
 
-Get real-time information of your favorite route. You can obtain estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically. Note that it is a real-time data, it may generate error message"No service scheduled" when you request at a time out of operation.
+Get real-time information of your favorite route. You can obtain estimated arrival time, waiting time, travel time, delay and alert message. It also allows users to collect and save the real-time information for a given period in a data frame through calling the function periodically. Note that it is a real-time data, it may generate error message"No service scheduled" when you request at a time out of operation. Or, it may generate error message "No arrival times" if the system has not been updated yet, since the CTA system update the data about once per minute.
 
-![ ](man/figures/example_myfavrt.png)
+```{r}
+result <- myfavrt(bus = 126, start_id = 36, end_id = 60, interval= 60, times = 5)
+knitr::kable(head(result))
+```
+
+**Get Alerts**
+
+Get the alerts of bus number 8.
+
+```{r}
+result <-get_alert(bus = 8)
+knitr::kable(head(result))
+```
 
 **Get an Overview of Current Bus Alerts**
 
 Obtain an overview of current alerts of all CTA buses through a summary table that provide the count of each type of alerts.
 ```{r echo=TRUE}
-alertstat()
+result <- alertstat()
+knitr::kable(head(result), col.names = c("Type", "Frequency"))
 ```
 
 ## Vignettes
 
-Detailed information about functions can be otained through the following:
+Detailed application of functions can be otained through the following:
 
 ```{r, eval=FALSE}
-# search for stop information
-vignette("lookupstop", package = "rCTA")
+# search for general information
+vignette("lookup_info", package = "rCTA")
 ```
 
 ```{r, eval=FALSE}
 # set up my favorite route
-vignette("myfavrt", package = "rCTA")
+vignette("setup_myfavorite", package = "rCTA")
 ```
 
 ```{r, eval=FALSE}
-# get statistical information of alerts
-vignette("alertstat", package = "rCTA")
+# get information of alerts
+vignette("Alert_info", package = "rCTA")
 ```
 ## Contact
 yc3539@columbia.edu or open GitHub issue.
